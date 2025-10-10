@@ -65,6 +65,28 @@ vim.keymap.set("n", "<leader>ct", function()
     vim.cmd("startinsert")
 end, { noremap = true, silent = true, desc = "Add TODO Comment" })
 
-require("valentin.lazy")
+vim.keymap.set('n', '<leader>q', function()
+    local qf_open = false
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        if vim.api.nvim_buf_get_option(buf, 'buftype') == 'quickfix' then
+            qf_open = true
+            vim.api.nvim_win_close(win, true)
+            break
+        end
+    end
+    if not qf_open then
+        vim.cmd('botright copen')
+        vim.cmd('wincmd p')
+    end
+end, { noremap = true, silent = true })
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank({higroup="IncSearch", timeout=1000})
+    end
+})
+
+require("valentin.lazy")
 require("valentin.dashboards.default")
+

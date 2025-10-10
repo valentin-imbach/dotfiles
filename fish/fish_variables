@@ -1,7 +1,9 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
-SETUVAR --export --path PATH:/usr/local/bin\x1e/Applications/kitty\x2eapp/Contents/MacOS\x1e/usr/bin\x1e/bin\x1e/usr/sbin\x1e/sbin
+SETUVAR --export --path PATH:/Library/TeX/texbin\x1e/Users/valentin/\x2ecargo/bin\x1e/usr/local/bin\x1e/Applications/kitty\x2eapp/Contents/MacOS\x1e/usr/bin\x1e/bin\x1e/usr/sbin\x1e/sbin
+SETUVAR --export QUTE_CONFIG_DIR:/Users/valentin/\x2econfig/qutebrowser
+SETUVAR --export WEATHERCRAB_CONFIG:/Users/valentin/\x2econfig/weathercrab/wthrr\x2eron
 SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
@@ -31,4 +33,4 @@ SETUVAR fish_pager_color_description:yellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/Users/valentin/\x2ecargo/bin\x1e/usr/local/bin
+SETUVAR fish_user_paths:/Library/TeX/texbin\x1e/Users/valentin/\x2ecargo/bin\x1e/usr/local/bin

@@ -1,13 +1,15 @@
 
 alt - b : open -a Arc
 alt - t : open -a Kitty
-alt - s : open -a Spotify
-alt - p : open -a Preview
+alt - p : open -a Skim
 alt - c : open -a Calendar
 alt - m : open -a Mail
 alt - l : open -a Slack
 alt - f : open -a Finder
 alt - a : open -a Activity\ Monitor
+alt - g : open -a GitHub\ Desktop
+
+alt - s : spotify_player playback play-pause
 
 alt + cmd - left : yabai -m window --grid 1:2:0:0:1:1
 alt + cmd - right : yabai -m window --grid 1:2:1:0:1:1
@@ -18,7 +20,6 @@ alt - left  : yabai -m window --focus west
 alt - down  : yabai -m window --focus south
 alt - up    : yabai -m window --focus north
 alt - right : yabai -m window --focus east
-
 
 alt + cmd - b : yabai -m space --layout bsp
 alt + cmd - s : yabai -m space --layout stack

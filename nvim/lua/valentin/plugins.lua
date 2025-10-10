@@ -122,8 +122,11 @@ return {
         lazy = false,
         ft = 'tex',  -- Optional: only load for TeX files
         init = function()
-            vim.g.vimtex_view_automatic = 0
             vim.g.vimtex_quickfix_open_on_warning = 0
+            vim.g.vimtex_view_method = 'skim'
+            vim.g.vimtex_skim_sync = 1
+            vim.g.vimtex_view_skim_activate = 1
+            vim.g.vimtex_format_enabled = 1
         end,
     },
 
@@ -180,7 +183,30 @@ return {
         keys = {
             { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
         }
+    },
+
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        -- @module 'render-markdown'
+        -- @type render.md.UserConfig
+        opts = {},
+    },
+
+    {
+        "3rd/image.nvim",
+        build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+        opts = {
+            processor = "magick_cli",
+        }
+    },
+
+    {
+        'ThePrimeagen/vim-be-good'
     }
+
 
     -- {
         --     "akinsho/toggleterm.nvim",

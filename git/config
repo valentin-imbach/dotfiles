@@ -1,0 +1,17 @@
+[user]
+	name = Valentin Imbach
+	email = valentin.imbach.acc@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[credential]
+	helper = store
+[alias]
+	cmp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
+[core]
+	editor = subl --wait
+	autocrlf = input
+[init]
+	defaultBranch = master
