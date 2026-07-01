@@ -22,11 +22,11 @@ vim.diagnostic.config({
     virtual_text = true,
     signs = true,
     underline = true,
-    update_in_insert = false,
+    update_in_insert = true,
     severity_sort = true
 })
 
-vim.keymap.set("n", "<leader>d", vim.diagnostic.goto_next, { desc = "Go to previous diagnostic" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "<leader>D", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 vim.o.updatetime = 1000
 vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })")
@@ -87,6 +87,59 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt.spell = true
+        vim.opt.spelllang = "en_gb"
+    end
+})
+
+vim.api.nvim_create_user_command("SpellCheckDirectory", function()
+  local cwd = vim.fn.getcwd()
+  vim.cmd("args " .. cwd .. "/**/*.tex")  -- only .tex files
+
+  local qf = {}
+
+  for _, buf in ipairs(vim.fn.getbufinfo({bufloaded = 1})) do
+    local name = buf.name
+    if name ~= "" and vim.fn.filereadable(name) == 1 then
+      vim.fn.bufload(buf.bufnr)
+      vim.cmd("buffer " .. buf.bufnr)
+
+      -- set LaTeX filetype and spell
+      vim.bo.filetype = "tex"
+      vim.opt_local.spell = true
+
+      -- start at beginning
+      vim.api.nvim_win_set_cursor(0, {1, 0})
+
+      while true do
+        local bad = vim.fn.spellbadword()
+        local word = bad[1]
+        if word == "" then break end
+
+        table.insert(qf, {
+          filename = name,
+          lnum = vim.fn.line("."),
+          col = vim.fn.col("."),
+          text = "Misspelling: " .. word,
+        })
+
+        -- move cursor forward
+        vim.cmd("normal! " .. #word .. "l")
+      end
+    end
+  end
+
+  vim.fn.setqflist(qf, "r")
+  vim.cmd("copen")
+  print("Use :cnext + z= to interactively fix LaTeX misspellings.")
+end, {})
+
+
+
 require("valentin.lazy")
 require("valentin.dashboards.default")
+
 

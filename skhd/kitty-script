@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Usage: $0 <cli-command> [args...]"
+  exit 1
+fi
+
+CMD="$*"
+MATCH="$1"
+
+# Try to find a kitty window where the CLI is the foreground process
+WIN_ID=$(kitty @ ls | jq -r '
+.[] | .tabs[] | .windows[] |
+select(.foreground_processes[]?.cmdline | join(" ") | contains("'"$MATCH"'")) |
+.id
+' | head -n1)
+
+if [[ -n "${WIN_ID:-}" ]]; then
+  # Focus the existing window/tab
+  kitty @ focus-window --match id:$WIN_ID
+else
+  # Create a new tab and run the command
+  kitty @ launch --type=tab --hold bash -lic "$CMD"
+fi

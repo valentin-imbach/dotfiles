@@ -205,7 +205,74 @@ return {
 
     {
         'ThePrimeagen/vim-be-good'
+    },
+
+    {
+        "stevearc/oil.nvim",
+        opts = {},
+        dependencies = { "nvim-tree/nvim-web-devicons" }
+    },
+
+    {
+        "grddavies/tidal.nvim",
+        opts = {},
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            opts = { ensure_installed = { "haskell", "supercollider" } },
+        },
+    },
+
+    {
+        "hat0uma/csvview.nvim",
+        ---@module "csvview"
+        ---@type CsvView.Options
+        opts = {
+            parser = { comments = { "#", "//" } },
+            keymaps = {
+                -- Text objects for selecting fields
+                textobject_field_inner = { "if", mode = { "o", "x" } },
+                textobject_field_outer = { "af", mode = { "o", "x" } },
+                -- Excel-like navigation:
+                -- Use <Tab> and <S-Tab> to move horizontally between fields.
+                -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+                -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+                jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+                jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+                jump_next_row = { "<Enter>", mode = { "n", "v" } },
+                jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
+            },
+            view = {
+                display_mode = "border",
+                header_lnum = 1,
+            },
+        },
+        cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+    },
+
+    {
+        'Julian/lean.nvim',
+        event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+
+            -- optional dependencies:
+
+            -- a completion engine
+            --    hrsh7th/nvim-cmp or Saghen/blink.cmp are popular choices
+
+            -- 'nvim-telescope/telescope.nvim', -- for 2 Lean-specific pickers
+            -- 'andymass/vim-matchup',          -- for enhanced % motion behavior
+            -- 'andrewradev/switch.vim',        -- for switch support
+            -- 'tomtom/tcomment_vim',           -- for commenting
+        },
+
+        ---@type lean.Config
+        opts = { -- see below for full configuration options
+            mappings = true,
+        }
     }
+
 
 
     -- {
@@ -214,4 +281,5 @@ return {
         --     opts = {},
         -- },
 
-    }
+}
+

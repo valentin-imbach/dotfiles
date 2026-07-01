@@ -1,0 +1,3 @@
+d1
+  $ slow 4
+  $ sound "wind*4"
