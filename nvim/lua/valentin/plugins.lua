@@ -1,10 +1,13 @@
+
+---@diagnostic disable: undefined-global
+
 return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme("catppuccin") 
+            vim.cmd.colorscheme("catppuccin")
         end,
         opts = { flavour = "mocha", }
     },
@@ -15,7 +18,7 @@ return {
         dependencies = { "nvim-lua/plenary.nvim", },
         keys = {
             { "<leader>tf", "<CMD>Telescope find_files<CR>", desc = "Telescope find files" },
-            { "<leader>tw", "<CMD>Telescope live_grep<CR>", desc = "Telescope live grep" },
+            { "<leader>tg", "<CMD>Telescope live_grep<CR>", desc = "Telescope live grep" },
             { "<leader>tr", "<CMD>Telescope oldfiles<CR>", desc = "Telescope old files" },
             { "<leader>tb", "<CMD>Telescope file_browser<CR>", desc = "Telescope browse files" },
         },
@@ -30,7 +33,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         opts = {
-            ensure_installed = {"lua", "cpp", "latex"},
+            ensure_installed = {"lua", "cpp", "latex", "typst"},
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
@@ -44,12 +47,17 @@ return {
         dependencies = {
             { "williamboman/mason.nvim", opts = {} },
             { "williamboman/mason-lspconfig.nvim", opts = {
-                ensure_installed = { "clangd", "lua_ls" },
+                ensure_installed = {
+                    "clangd",
+                    "lua_ls",
+                    -- "ltex-ls",
+                    "tinymist",
+                },
                 setup_handlers = function(server_name)
                     require("lspconfig")[server_name].setup({})
                 end
             } },
-        }
+        },
     },
 
     {
@@ -85,11 +93,11 @@ return {
                 },
             }
         end,
-        enabled = function()
-            -- Disable cmp if Copilot is showing a suggestion
-            local copilot_visible = require("copilot.suggestion").is_visible()
-            return not copilot_visible
-        end,
+        -- enabled = function()
+        --     -- Disable cmp if Copilot is showing a suggestion
+        --     local copilot_visible = require("copilot.suggestion").is_visible()
+        --     return not copilot_visible
+        -- end,
     },
 
     {
@@ -100,9 +108,9 @@ return {
     {
         'sudormrfbin/cheatsheet.nvim',
         dependencies = {
-            {'nvim-telescope/telescope.nvim'},
-            {'nvim-lua/popup.nvim'},
-            {'nvim-lua/plenary.nvim'},
+            { 'nvim-telescope/telescope.nvim' },
+            { 'nvim-lua/popup.nvim' },
+            { 'nvim-lua/plenary.nvim' },
         },
         opts = {
             bundled_cheatsheets = {
@@ -134,37 +142,37 @@ return {
         "micangl/cmp-vimtex",
     },
 
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        opts = {
-            enable = true,
-            auto_trigger = true,
-            keymap = {
-                accept = "<C-a>",
-            }
-        },
-        init = function()
-            vim.keymap.set("n", "<leader>ct", function()
-                require("copilot.suggestion").toggle_auto_trigger()
-            end, { desc = "Toggle Copilot Auto-Trigger"})
-
-            vim.keymap.set("i", "<S-Tab>", function()
-                require("copilot.suggestion").accept()
-            end, { desc = "Accept Copilot Suggestion" })
-
-            -- cycle thrhoug suggestions with C-n and C-p
-            vim.keymap.set("i", "<C-Right>", function()
-                require("copilot.suggestion").next()
-            end, { desc = "Next Copilot Suggestion" })
-
-            vim.keymap.set("i", "<C-Left>", function()
-                require("copilot.suggestion").prev()
-            end, { desc = "Previous Copilot Suggestion" })
-
-        end,
-    },
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     opts = {
+    --         enable = true,
+    --         auto_trigger = true,
+    --         keymap = {
+    --             accept = "<C-a>",
+    --         }
+    --     },
+    --     init = function()
+    --         vim.keymap.set("n", "<leader>ct", function()
+    --             require("copilot.suggestion").toggle_auto_trigger()
+    --         end, { desc = "Toggle Copilot Auto-Trigger"})
+    --
+    --         vim.keymap.set("i", "<S-Tab>", function()
+    --             require("copilot.suggestion").accept()
+    --         end, { desc = "Accept Copilot Suggestion" })
+    --
+    --         -- cycle thrhoug suggestions with C-n and C-p
+    --         vim.keymap.set("i", "<C-Right>", function()
+    --             require("copilot.suggestion").next()
+    --         end, { desc = "Next Copilot Suggestion" })
+    --
+    --         vim.keymap.set("i", "<C-Left>", function()
+    --             require("copilot.suggestion").prev()
+    --         end, { desc = "Previous Copilot Suggestion" })
+    --
+    --     end,
+    -- },
 
     {
         "kdheepak/lazygit.nvim",
@@ -213,14 +221,14 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" }
     },
 
-    {
-        "grddavies/tidal.nvim",
-        opts = {},
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            opts = { ensure_installed = { "haskell", "supercollider" } },
-        },
-    },
+    -- {
+    --     "grddavies/tidal.nvim",
+    --     opts = {},
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         opts = { ensure_installed = { "haskell", "supercollider" } },
+    --     },
+    -- },
 
     {
         "hat0uma/csvview.nvim",
@@ -250,7 +258,7 @@ return {
     },
 
     {
-        'Julian/lean.nvim',
+        "Julian/lean.nvim",
         event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
 
         dependencies = {
@@ -271,7 +279,26 @@ return {
         opts = { -- see below for full configuration options
             mappings = true,
         }
-    }
+    },
+
+    {
+        "chomosuke/typst-preview.nvim",
+        ft = "typst",
+        version = "1.*",
+        opts = {
+            dependencies_bin = {
+                -- tinymist = "tinymist",
+            },
+        },
+    },
+
+    {
+        "junegunn/goyo.vim",
+    },
+
+    {
+        "junegunn/limelight.vim",
+    },
 
 
 

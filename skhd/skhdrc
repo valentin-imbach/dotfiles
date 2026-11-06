@@ -6,6 +6,7 @@ alt - l : open -a Slack
 alt - f : open -a Finder
 alt - a : open -a Activity\ Monitor
 alt - g : open -a GitHub\ Desktop
+alt - s : open -a Skim
 
 alt + cmd - left : yabai -m window --grid 1:2:0:0:1:1
 alt + cmd - right : yabai -m window --grid 1:2:1:0:1:1

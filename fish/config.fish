@@ -40,6 +40,8 @@ fish_add_path /Library/TeX/texbin
 fish_add_path /Users/valentin/go/bin
 fish_add_path /Users/valentin/.pat/bin
 fish_add_path /Users/valentin/.rbenv/bin
+fish_add_path /Users/valentin/emsdk
+fish_add_path /Users/valentin/emsdk/upstream/emscripten
 
 zoxide init fish | source
 set --export PATH $HOME/.pat/bin $PATH

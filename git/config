@@ -11,7 +11,7 @@
 [alias]
 	cmp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
 [core]
-	editor = subl --wait
+	editor = nvim
 	autocrlf = input
 [init]
 	defaultBranch = master
