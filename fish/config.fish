@@ -3,15 +3,15 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-function fish_preexec --on-event fish_preexec
-    set cmd (string split " " -- $argv[1])[1]
-    switch $cmd
-        case spotify_player
-            set cmd "spotify"
-    end
-    echo -ne "\033]2;$cmd\007"
-end
-
+# function fish_preexec --on-event fish_preexec
+#     set cmd (string split " " -- $argv[1])[1]
+#     switch $cmd
+#         case spotify_player
+#             set cmd "spotify"
+#     end
+#     echo -ne "\033]2;$cmd\007"
+# end
+#
 function y
 	set tmp (mktemp -t "yazi-cwd.XXXXXX")
 	yazi $argv --cwd-file="$tmp"
@@ -44,6 +44,7 @@ fish_add_path /Users/valentin/emsdk
 fish_add_path /Users/valentin/emsdk/upstream/emscripten
 
 zoxide init fish | source
+
 set --export PATH $HOME/.pat/bin $PATH
 
 status --is-interactive; and source (rbenv init -|psub)

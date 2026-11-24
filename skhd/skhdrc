@@ -11,3 +11,5 @@ alt - s : open -a Skim
 alt + cmd - left : yabai -m window --grid 1:2:0:0:1:1
 alt + cmd - right : yabai -m window --grid 1:2:1:0:1:1
 alt + cmd - up : yabai -m window --grid 1:1:0:0:1:1
+
+

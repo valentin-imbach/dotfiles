@@ -22,7 +22,7 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Center search result" })
 
 vim.keymap.set("n", "G", "Gzz", { desc = "Center buffer bottom" })
 
-vim.keymap.set({ "n", "v" }, "<leader>z", "<cmd>Goyo<CR>", { desc = "Zen Mode" })
+vim.keymap.set({ "n", "v" }, "<leader>zm", "<cmd>Goyo<CR>", { desc = "Zen Mode" })
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard" })
@@ -31,3 +31,5 @@ vim.keymap.set({ "n", "v" }, "<Up>", "gk", { desc = "Move up visual line" })
 vim.keymap.set({ "n", "v" }, "<Down>", "gj", { desc = "Move up visual line" })
 vim.keymap.set({ "i" }, "<Up>", "<C-o>gk", { desc = "Move up visual line" })
 vim.keymap.set({ "i" }, "<Down>", "<C-o>gj", { desc = "Move up visual line" })
+
+

@@ -14,8 +14,11 @@ vim.opt.shiftwidth = 4
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+vim.opt.wrap = true
+vim.opt.breakindent = true
+vim.opt.linebreak = true
+
 vim.opt.smartindent = true
-vim.opt.wrap = false
 vim.opt.scrolloff = 8
 
 vim.diagnostic.config({
@@ -68,10 +71,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "markdown",
+    pattern = { "markdown", "text", "html", "typ", "tex", "gitcommit"},
     callback = function()
-        vim.opt.spell = true
-        vim.opt.spelllang = "en_gb"
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = { "en_gb", "de_ch", "fr" }
     end
 })
 
@@ -117,16 +120,16 @@ vim.api.nvim_create_autocmd("FileType", {
 --     print("Use :cnext + z= to interactively fix LaTeX misspellings.")
 -- end, {})
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "typst",
-    callback = function()
-        vim.opt_local.wrap = true
-        vim.opt_local.linebreak = true
-        vim.opt_local.breakindent = true
-        vim.opt_local.textwidth = 65
-        vim.opt_local.colorcolumn = "66"
-    end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "typst",
+--     callback = function()
+--         vim.opt_local.wrap = true
+--         vim.opt_local.linebreak = true
+--         vim.opt_local.breakindent = true
+--         vim.opt_local.textwidth = 65
+--         vim.opt_local.colorcolumn = "66"
+--     end,
+-- })
 
 vim.api.nvim_create_autocmd("User", {
     pattern = "GoyoEnter",
@@ -145,6 +148,7 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 require("valentin.keymaps")
+require("valentin.spell-check")
 require("valentin.lazy")
 require("valentin.dashboards.default")
 
